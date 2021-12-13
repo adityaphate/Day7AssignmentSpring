@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/aop
+                           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="account" class="com.practice.Day7.Account">
+        <property name="id" value="11"></property>
+        <property name="name" value="adii"></property>
+        <property name="balance" value="45000.0"></property>
+    </bean>
+    <!--    <bean id="test" class="com.phoenix.TestClass"/>-->
+    <bean id="service" class="com.practice.Day7.CheckValidity"/>
+
+    <aop:config>
+        <aop:aspect ref="service">
+            <aop:pointcut
+                    expression="execution (* com.practice.Day7.*.*(..))" id="pointCutId"/>
+            <aop:before method="checkValid" pointcut-ref="pointCutId"/>
+        </aop:aspect>
+    </aop:config>
+</beans>
